@@ -1,0 +1,211 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath, amssymb} % куча стандартных математических плюшек
+
+
+\usepackage{comment}
+
+\usepackage[top=2cm, left=1.2cm, right=1.2cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Временные ряды}
+\chead{}
+\rhead{2020-10-31, праздник номер раз!}
+\lfoot{}
+\cfoot{НЕ ПАНИКОВАТЬ}
+\rfoot{\thepage/\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+\let\P\relax
+\DeclareMathOperator{\P}{\mathbb{P}}
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos --- печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+%\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+
+
+\begin{document}
+
+Дорогой храбрый воин или храбрая воительница! Удачи тебе на первом празднике по временным рядам!
+Начни с того, что напиши клятву и подпишись под ней:
+
+\vspace{10pt}
+\textit{Я клянусь честью студента, что буду выполнять эту работу самостоятельно.}
+\vspace{10pt}
+
+
+А теперь — задачки:
+
+
+\begin{enumerate}
+
+\item Рассмотрим уравнение $y_t = 3 + 0.4y_{t-1} + u_t$, где $u_t$ независимы и нормальны $\cN(0; 9)$
+Я не спрашиваю, есть ли у уравнения стационарное решение и сколько их.  
+Скажу прямо: оно есть! Верь мне! И даже добавлю, что в нём $y_t$ представим в виде 
+\[
+	y_t = c + u_t + \alpha_1 u_{t-1} + \alpha_2 u_{t-2} + \ldots
+\]
+
+\begin{enumerate}
+	\item Найди $c$ и все $\alpha_k$.
+	\item Найди $\E(y_t)$, $\Var(y_t)$ и первые два значения автокорреляционной функции. 
+\end{enumerate}
+Дополнительно известно, что $y_{100}=5$.
+\begin{enumerate}[resume]
+	\item Найди 95\%-й предиктивный интервал для $y_{101}$. 
+	\item Найди 95\%-й долгосрочный предиктивный интервал для $y_{100+h}$, 
+	где $h \to \infty$. Зависит ли он от $y_{100}$?
+\end{enumerate}
+	
+
+
+\item Временной ряд порождается $MA(2)$ процессом $y_t = 3 + u_t + 0.5u_{t-1} + 0.2 u_{t-2}$.
+
+Однако Винни-Пух строит регрессию $\hat y_t = \hat\beta_1 + \hat\beta_2 y_{t-1}$ с помощью МНК.
+
+\begin{enumerate}
+	\item Найди $\E(y_t)$, $\Var(y_t)$, $\Cov(y_t, y_s)$.
+	\item Какие коэффициенты примерно получит Винни-Пух, если у него много наблюдений?
+\end{enumerate}
+
+
+\item Рассмотрим процесс $y_t = u_1 \sin 5t + u_2 \cos 5t$, где $u_t$ — белый шум.
+\begin{enumerate}
+	\item Является ли данный процесс стационарным?
+	\item Можно ли представить данный процесс в виде $MA(\infty)$? 
+	На всякий случай, чтобы не гуглить, я напомню, $MA(\infty)$-процесс имеет вид:
+
+	\[
+	y_t = c + \varepsilon_t + \alpha_1 \varepsilon_{t-1} + \alpha_2 \varepsilon_{t-2} + \ldots,
+	\]
+	где $\varepsilon_t$ — белый шум. 
+	И да, обращу внимание, что шум $\varepsilon_t$ не обязательно совпадает с шумом $u_t$
+\end{enumerate}
+
+\end{enumerate}
+
+Дорогой студент, храбро решающий онлайн контрольную! Я в тебя верю, осталось три задачи!
+
+Смелее переходи на следующую страницу!
+\newpage
+
+\begin{enumerate}[resume]
+
+\item У стационарного процесса $y_t$ первые две обычные корреляции равны $\rho_1 = 0.5$, $\rho_2 = 0.2$,
+а ожидание равно $\E(y_t) = 20$. 
+
+Известно, что $y_{100} = 25$, $y_{99} = 22$. Найди наилучший точечный прогноз для $y_{101}$.
+
+
+
+Псccст, парень! Это была задача про частные корреляции! 
+
+\item Вспомни $ETS(AAN)$ модель, а я тебе даже уравнения напишу:
+
+\[
+\begin{cases}
+y_t = \ell_{t-1} + b_{t-1} + u_t \\
+\ell_t = \ell_{t-1} + b_{t-1} + \alpha u_t \\
+b_t = b_{t-1} + \beta u_t \\
+u_t \sim \cN(0;\sigma^2) \\
+% s_t = s_{t-12} + \gamma \varepsilon_t \\
+\end{cases}
+\]
+
+\begin{enumerate}
+	\item Ты вчера чатик читал? Помнишь там вопрос был? Ага! 
+	Докажи, что ни при каких $\ell_0$ и $b_0$ этот процесс не будет стационарным. 
+	Или опровергни и приведи пример, при каких будет. 
+	
+	Константы $\alpha$, $\beta$ лежат в интервале $(0;1)$.
+	
+	\item При $l_{100} = 20$, $b_{100} = 2$, $\alpha=0.2$, $\beta=0.3$, $\sigma^2 = 16$ построй
+	интервальный прогноз на один и два шага вперёд. 
+\end{enumerate}
+
+
+
+\item Величины $x_t$ равновероятно равны $0$ или $1$, 
+а величины $u_t$ нормальны $\cN(0; 1)$. Все упомянутые величины независимы.
+Рассмотрим процесс $z_t = x_t^2 (1-x_{t-1}) u_t$.
+
+\begin{enumerate}
+	\item Найди $\Cov(z_t, z_s)$. Стационарен ли процесс $z_t$?
+	\item Скажу тебе по секрету, что $z_{100} = 2.3$. 
+	Построй точечный и 95\%-й интервальный прогноз на один и два шага вперёд. 
+	Чем интервальные прогнозы в этой задаче особенные?
+\end{enumerate}
+
+
+\end{enumerate}
+
+\end{document}
