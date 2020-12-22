@@ -2,3 +2,7 @@
 *.bls
 *.toc
 *.xdv
+*.fls
+*.log
+*.aux
+*.fdb_latexmk
