@@ -1,0 +1,234 @@
+\documentclass[a4paper,12pt]{article}
+
+%%% Работа с русским языком
+\usepackage{cmap}					% поиск в PDF
+\usepackage{mathtext} 				% русские буквы в формулах
+\usepackage[T2A]{fontenc}			% кодировка
+\usepackage[utf8]{inputenc}			% кодировка исходного текста
+\usepackage[english,russian]{babel}	% локализация и переносы
+
+%%% Дополнительная работа с математикой
+\usepackage{amsfonts,amssymb,amsthm,mathtools} % AMS
+\usepackage{amsmath}
+\usepackage{icomma} % "Умная" запятая: $0,2$ --- число, $0, 2$ --- перечисление
+
+\usepackage[left = 2cm, right = 2cm, top = 2cm, bottom = 2cm]{geometry}
+
+
+%% Номера формул
+%\mathtoolsset{showonlyrefs=true} % Показывать номера только у тех формул, на которые есть \eqref{} в тексте.
+
+%% Шрифты
+\usepackage{euscript}	 % Шрифт Евклид
+\usepackage{mathrsfs} % Красивый матшрифт
+
+%% Свои команды
+\DeclareMathOperator{\sgn}{\mathop{sgn}}
+
+%% Перенос знаков в формулах (по Львовскому)
+\newcommand*{\hm}[1]{#1\nobreak\discretionary{}
+	{\hbox{$\mathsurround=0pt #1$}}{}}
+
+%%% Работа с картинками
+\usepackage{graphicx}  % Для вставки рисунков
+\graphicspath{{images/}{images2/}}  % папки с картинками
+\setlength\fboxsep{3pt} % Отступ рамки \fbox{} от рисунка
+\setlength\fboxrule{1pt} % Толщина линий рамки \fbox{}
+\usepackage{wrapfig} % Обтекание рисунков и таблиц текстом
+
+%%% Работа с таблицами
+\usepackage{array,tabularx,tabulary,booktabs} % Дополнительная работа с таблицами
+\usepackage{longtable}  % Длинные таблицы
+\usepackage{multirow} % Слияние строк в таблице
+\usepackage{upgreek}
+\usepackage{enumerate}
+\usepackage{ dsfont }
+
+%%% Цветной текст
+
+\usepackage[usenames]{color}
+\usepackage{colortbl}
+\usepackage[table,xcdraw]{xcolor}
+
+%%% Солнышко
+
+\usepackage[weather]{ifsym}
+
+%%% Гиперссылки
+
+\usepackage{xcolor}
+\usepackage{hyperref}
+\definecolor{linkcolor}{HTML}{199B03} % цвет ссылок
+\definecolor{urlcolor}{HTML}{199B03} % цвет гиперссылок
+
+\hypersetup{pdfstartview=FitH,  linkcolor=linkcolor,urlcolor=urlcolor, colorlinks=true}
+
+\usepackage{minted}
+
+%% Tikz
+
+\usepackage{pgf,tikz,pgfplots}
+\pgfplotsset{compat=1.15}
+\usepackage{mathrsfs}
+\usetikzlibrary{arrows}
+\pagestyle{empty}
+
+%%Вставка картинок
+\usepackage{graphicx}
+\graphicspath{{pictures/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg}
+
+
+%% эконометрические сокращения
+\def \hb{\hat{\beta}}
+\DeclareMathOperator{\sVar}{sVar}
+\DeclareMathOperator{\sCov}{sCov}
+\DeclareMathOperator{\sCorr}{sCorr}
+
+
+\def \hs{\hat{s}}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \he{\hat{\varepsilon}}
+\def \v1{\vec{1}}
+\def \cN{\mathcal{N}}
+\def \e{\varepsilon}
+\def \z{z}
+
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+
+\DeclareMathOperator{\tr}{tr}
+\DeclareMathOperator*{\plim}{plim}
+
+
+%% лаг
+\renewcommand{\L}{\mathrm{L}}
+
+
+\usepackage{pgf}
+\usepackage{tikz}
+\usetikzlibrary{arrows,automata}
+
+
+% DEFS
+\def \mbf{\mathbf}
+\def \msf{\mathsf}
+\def \mbb{\mathbb}
+\def \tbf{\textbf}
+\def \tsf{\textsf}
+\def \ttt{\texttt}
+\def \tbb{\textbb}
+
+\def \wh{\widehat}
+\def \wt{\widetilde}
+\def \ni{\noindent}
+\def \ol{\overline}
+\def \cd{\cdot}
+\def \bl{\bigl}
+\def \br{\bigr}
+\def \Bl{\Bigl}
+\def \Br{\Bigr}
+\def \fr{\frac}
+\def \bs{\backslash}
+\def \lims{\limits}
+\def \arg{{\operatorname{arg}}}
+\def \dist{{\operatorname{dist}}}
+\def \VC{{\operatorname{VCdim}}}
+\def \card{{\operatorname{card}}}
+\def \sgn{{\operatorname{sign}\,}}
+\def \sign{{\operatorname{sign}\,}}
+\def \xfs{(x_1,\ldots,x_{n-1})}
+\def \Tr{{\operatorname{\mbf{Tr}}}}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\amn}{arg\,min}
+\DeclareMathOperator*{\amx}{arg\,max}
+\def \cov{{\operatorname{Cov}}}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator{\Corr}{Corr}
+
+\def \xfs{(x_1,\ldots,x_{n-1})}
+\def \ti{\tilde}
+\def \wti{\widetilde}
+
+
+\def \mL{\mathcal{L}}
+\def \mW{\mathcal{W}}
+\def \mH{\mathcal{H}}
+\def \mC{\mathcal{C}}
+\def \mE{\mathcal{E}}
+\def \mN{\mathcal{N}}
+\def \mA{\mathcal{A}}
+\def \mB{\mathcal{B}}
+\def \mU{\mathcal{U}}
+\def \mV{\mathcal{V}}
+\def \mF{\mathcal{F}}
+
+\def \R{\mbb R}
+\def \N{\mbb N}
+\def \Z{\mbb Z}
+\def \P{\mbb{P}}
+%\def \p{\mbb{P}}
+\def \E{\mbb{E}}
+\def \F{\mbb{F}}
+\def \D{\msf{D}}
+\def \I{\mbf{I}}
+\def \L{\mathcal{L}}
+
+\def \a{\alpha}
+\def \b{\beta}
+\def \t{\tau}
+\def \dt{\delta}
+\def \e{\varepsilon}
+\def \ga{\gamma}
+\def \kp{\varkappa}
+\def \la{\lambda}
+\def \sg{\sigma}
+\def \sgm{\sigma}
+\def \tt{\theta}
+\def \ve{\varepsilon}
+\def \Dt{\Delta}
+\def \La{\Lambda}
+\def \Sgm{\Sigma}
+\def \Sg{\Sigma}
+\def \Tt{\Theta}
+\def \Om{\Omega}
+\def \om{\omega}
+
+\usepackage{enumitem}
+
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii}.}
+%%% Заголовок
+
+\title{Экзамен по курсу "Моделирование временных рядов"}
+\date{\today}
+
+\begin{document}
+\maketitle
+
+\begin{enumerate}
+	\item Пусть вы оцениваете GARCH(1,1) модель следующего вида:
+	\[ \alpha = \sigma_t \epsilon_t, \quad \sigma_{h+1}^{2}=\alpha_{0}+\alpha_{1} a_{h}^{2}+\beta_{1} \sigma_{h}^{2} \]
+	
+	В результате оценки модели вы получили следующие оценки:
+	\[ \hat{\alpha}_0 = 0.1, \quad \hat{\alpha}_1 = 0.3, \quad \hat{\beta}_1 = 0.7, \quad \hat{\sigma}^2_t = 1, \quad \epsilon_t = 0.5 \]
+	
+	Постройте прогноз GARCH(1,1)-модели на два шага вперёд. Хинт: не забудьте, что прогноз -- это условное матожидание при условии информации на момент времени $ t$ -- $ I_t$
+	
+	\item 
+	
+	Является ли следующая система уравнений для VAR(1) - модели стабильной?
+	\[
+	\begin{array}{l}
+		y_t = 0.2 + 0.5 y_{t-1} + 0.1 z_{t-1} + \epsilon_{1, t}\\
+		z_t = 0.1 + 0.2 z_{t-1} +  \epsilon_{2, t} 
+		
+	\end{array} 
+\]
+\end{enumerate}
+
+
+\end{document}
