@@ -1,0 +1,182 @@
+\documentclass[12pt]{article}
+
+\usepackage{tikz} % картинки в tikz
+\usepackage{microtype} % свешивание пунктуации
+
+\usepackage{array} % для столбцов фиксированной ширины
+
+\usepackage{indentfirst} % отступ в первом параграфе
+
+\usepackage{sectsty} % для центрирования названий частей
+\allsectionsfont{\centering}
+
+\usepackage{amsmath} % куча стандартных математических плюшек
+
+\usepackage{comment}
+\usepackage{amsfonts}
+
+\usepackage[top=2cm, left=1cm, right=1cm, bottom=2cm]{geometry} % размер текста на странице
+
+\usepackage{lastpage} % чтобы узнать номер последней страницы
+
+\usepackage{enumitem} % дополнительные плюшки для списков
+%  например \begin{enumerate}[resume] позволяет продолжить нумерацию в новом списке
+\usepackage{caption}
+
+\usepackage{hyperref} % гиперссылки
+
+\usepackage{multicol} % текст в несколько столбцов
+
+
+\usepackage{fancyhdr} % весёлые колонтитулы
+\pagestyle{fancy}
+\lhead{Домашка}
+\rhead{Временные ряды}
+\lfoot{}
+\cfoot{}
+\rfoot{}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+
+
+\usepackage{todonotes} % для вставки в документ заметок о том, что осталось сделать
+% \todo{Здесь надо коэффициенты исправить}
+% \missingfigure{Здесь будет Последний день Помпеи}
+% \listoftodos --- печатает все поставленные \todo'шки
+
+
+% более красивые таблицы
+\usepackage{booktabs}
+% заповеди из докупентации:
+% 1. Не используйте вертикальные линни
+% 2. Не используйте двойные линии
+% 3. Единицы измерения - в шапку таблицы
+% 4. Не сокращайте .1 вместо 0.1
+% 5. Повторяющееся значение повторяйте, а не говорите "то же"
+
+
+\usepackage{fontspec}
+\usepackage{polyglossia}
+
+\setmainlanguage{russian}
+\setotherlanguages{english}
+
+% download "Linux Libertine" fonts:
+% http://www.linuxlibertine.org/index.php?id=91&L=1
+\setmainfont{Linux Libertine O} % or Helvetica, Arial, Cambria
+% why do we need \newfontfamily:
+% http://tex.stackexchange.com/questions/91507/
+\newfontfamily{\cyrillicfonttt}{Linux Libertine O}
+
+\AddEnumerateCounter{\asbuk}{\russian@alph}{щ} % для списков с русскими буквами
+\setlist[enumerate, 2]{label=\asbuk*),ref=\asbuk*}
+%\setlist[enumerate, 1]{label=\asbuk*),ref=\asbuk*}
+
+
+%% эконометрические сокращения
+\DeclareMathOperator{\Cov}{Cov}
+\DeclareMathOperator*{\plim}{plim}
+\DeclareMathOperator{\Corr}{Corr}
+\DeclareMathOperator{\Var}{Var}
+\DeclareMathOperator{\E}{E}
+\def \hb{\hat{\beta}}
+\def \hs{\hat{\sigma}}
+\def \htheta{\hat{\theta}}
+\def \s{\sigma}
+\def \hy{\hat{y}}
+\def \hY{\hat{Y}}
+\def \v1{\vec{1}}
+\def \e{\varepsilon}
+\def \he{\hat{\e}}
+\def \z{z}
+\def \hVar{\widehat{\Var}}
+\def \hCorr{\widehat{\Corr}}
+\def \hCov{\widehat{\Cov}}
+\def \cN{\mathcal{N}}
+\def \P{\mathbb{P}}
+
+
+\begin{document}
+
+\begin{enumerate}
+    \item «Взять языка». Незаметно для потенциального противника раздобудь два временных ряда: месячный и дневной. 
+    Не бери цены финансовых инструментов, так как они плохо прогнозируются в силу эффективности рынка.
+    Разумно взять реальные показатели. Если очень хочется работать с финансовыми данными, можно взять волатильность, 
+    она прогнозируется хорошо. Максимально чётко укажи, откуда взяты ряды. Если ряды парсились, то приведи код. 
+    При желании можно взять больше рядов и использовать какой-то ряд в качестве предиктора. 
+
+    \item «Намалевич». Построй графики рядов, графики автокорреляционных функций, графики с нарезкой ряда на годы для иллюстрации сезонности. 
+    
+    \item «Твиттер». Кратко прокомментируй полученные графики. 
+    Явлются ли ряды сезонными? есть ли тренд? стационарны ли ряды? есть ли точки излома? растёт ли амплитуда колебаний ряда?
+    Возьми логарифм ряда, если душа тянется к логарифму.
+
+    % \item «Разделяй и властвуй». Разделите ряды на обучающую и тестовую выборку в пропорции 80\% и 20\%. 
+
+    \item «Двенадцать месяцев». Для месячного ряда сравни прогнозы разных моделей на один шаг вперёд с помощью кросс-валидации скользящим окном. 
+    Длину скользящего окна выбери равной 80\% длины ряда. В качестве метрике возьми среднее абсолютное отклонение, MAE. 
+    Сравни следующие модели:
+
+    \begin{itemize}
+        \item Наивная, $\hat y_{t+1} = y_t$, \verb|NaiveForecaster| из \verb|sktime|.
+        \item Сезонная наивная, $\hat y_{t+1} = y_{t + 1 - 12}$, \verb|NaiveForecaster| из \verb|sktime|.
+        \item SARIMA(1, 1, 1)(1, 0, 0)[12], \verb|ARIMA| из \verb|sktime|.
+        \item Процедура Хиндмана-Хандакара подбора SARIMA, \verb|AutoARIMA| из \verb|sktime|.
+        \item LGT из пакета \verb|orbit|.
+        \item DLT из пакета \verb|orbit|.
+        \item ETS(AAA), \verb|ExponentialSmoothing| из \verb|sktime|.
+        \item ETS с автоматическим выбором по AIC, \verb|AutoETS| из \verb|sktime|.
+        \item (по желанию) Случайный лес или градиентный бустинг на лагированных $y_{t-s}$, \verb|sktime| будет удобнее :)
+    \end{itemize}
+
+    Ссылки: 
+    \begin{itemize}
+        \item \verb|sktime|: \url{https://www.sktime.org}.
+        \item \verb|orbit|: \url{https://orbit-ml.readthedocs.io}.
+        \item Процедура Хиндмана-Хандакара, \url{https://otexts.com/fpp3/arima-r.html}.
+    \end{itemize}
+
+    Выбери наилучшую модель и построй график прогнозов для неё на один год вперёд использовав все 100\% наблюдений как обучающую выборку.
+
+    \item «Ежедневный пророк». 
+    Раздели дневной ряд на обучающую и тестовую выборку. За тестовую возьмём последние два года. Если ряд короткий, то можно и один год взять в качестве тестовой.
+    Обучив модели на обучающей выборке, сравни качество прогнозов
+    на тестовой выборке с помощью MAE. Сравни следующие модели:
+
+    \begin{itemize}
+        \item Наивная.
+        \item Сезонная наивная.
+        \item KTR из пакета \verb|orbit|.
+        \item PROPHET с дефолтными настройками, \verb|sktime| удобно интергрирован с \verb|prophet|.
+        \item ARIMA(1, 1, 1) с тригонометрическими предикторами, \verb|ARIMA| из \verb|sktime|.
+    \end{itemize}
+
+    Ссылки: 
+    \begin{itemize}
+        \item Сергей Мастицкий, Анализ временных рядов с помощью R, \url{https://ranalytics.github.io/tsa-with-r/ch-intro-to-prophet.html}.
+        \item Тригонометрические предикторы, \url{https://robjhyndman.com/hyndsight/longseasonality/}.
+    \end{itemize}
+
+
+    Выбери наилучшую модель и построй график прогнозов для неё на один год вперёд использовав все 100\% наблюдений как обучающую выборку.
+
+
+    \item (по желанию) «Атолл Бикини». Разработай и испытай свою модель для месячного ряда в STAN\footnote{Какая связь между языком STAN и атоллом Бикини? :)}.
+    Сравни качество прогнозов с наивной сезонной на тестовой выборке с помощью MAE. 
+    
+    % \item «Итого». Сведите все MAE по всем рядам в одну табличку. Прокомментируйте, какая модель оказалась лучше для каждого ряда.
+
+
+\end{enumerate}
+
+Наставления в добрый путь храброму падавану:
+\begin{itemize}
+    \item Чаще используй \verb|sktime|, скорее всего там есть почти всё, что нужно :)
+    \item Сдавай работу в исполняемого \verb|.ipynb| файла. Приложи \verb|.csv| файлы с рядами. 
+    \item Мелкие детали, отсутствующие в условии, заполни самостоятельно, чётко описав свой выбор.
+    \item Да пребудет с тобой Сила!
+\end{itemize}
+
+
+\end{document}
