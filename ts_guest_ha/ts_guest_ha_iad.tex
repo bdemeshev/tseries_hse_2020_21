@@ -114,15 +114,15 @@
 
     % \item «Разделяй и властвуй». Разделите ряды на обучающую и тестовую выборку в пропорции 80\% и 20\%. 
 
-    \item «Двенадцать месяцев». Для месячного ряда сравни прогнозы разных моделей на один шаг вперёд с помощью кросс-валидации скользящим окном. 
-    Длину скользящего окна выбери равной 80\% длины ряда. В качестве метрике возьми среднее абсолютное отклонение, MAE. 
+    \item «Двенадцать месяцев». Для месячного ряда сравни прогнозы разных моделей на один шаг вперёд с помощью кросс-валидации скользящим или растущим окном. 
+    Длину скользящего окна (или стартовую длину растущего окна) выбери равной 80\% длины ряда. В качестве метрике возьми среднее абсолютное отклонение, MAE. 
     Сравни следующие модели:
 
     \begin{itemize}
         \item Наивная, $\hat y_{t+1} = y_t$, \verb|NaiveForecaster| из \verb|sktime|.
         \item Сезонная наивная, $\hat y_{t+1} = y_{t + 1 - 12}$, \verb|NaiveForecaster| из \verb|sktime|.
         \item SARIMA(1, 1, 1)(1, 0, 0)[12], \verb|ARIMA| из \verb|sktime|.
-        \item Процедура Хиндмана-Хандакара подбора SARIMA, \verb|AutoARIMA| из \verb|sktime|.
+        \item Алгоритм Хиндмана-Хандакара подбора SARIMA, \verb|AutoARIMA| из \verb|sktime|.
         \item LGT из пакета \verb|orbit|.
         \item DLT из пакета \verb|orbit|.
         \item ETS(AAA), \verb|ExponentialSmoothing| из \verb|sktime|.
@@ -134,11 +134,14 @@
     \begin{itemize}
         \item \verb|sktime|: \url{https://www.sktime.org}.
         \item \verb|orbit|: \url{https://orbit-ml.readthedocs.io}.
-        \item Процедура Хиндмана-Хандакара, \url{https://otexts.com/fpp3/arima-r.html}.
+        \item Прогнозы в sktime, в конце про кросс-валидацию: \url{https://www.sktime.org/en/latest/examples/01_forecasting.html}.
+        \item Картинки для кросс-валидации: \url{https://www.kaggle.com/cworsnup/backtesting-cross-validation-for-timeseries}.
+        \item Изложение алгоритма Хиндмана-Хандакара, \url{https://otexts.com/fpp3/arima-r.html}.
     \end{itemize}
 
     Выбери наилучшую модель и построй график прогнозов для неё на один год вперёд использовав все 100\% наблюдений как обучающую выборку.
 
+    \newpage
     \item «Ежедневный пророк». 
     Раздели дневной ряд на обучающую и тестовую выборку. За тестовую возьмём последние два года. Если ряд короткий, то можно и один год взять в качестве тестовой.
     Обучив модели на обучающей выборке, сравни качество прогнозов
@@ -154,7 +157,8 @@
 
     Ссылки: 
     \begin{itemize}
-        \item Сергей Мастицкий, Анализ временных рядов с помощью R, \url{https://ranalytics.github.io/tsa-with-r/ch-intro-to-prophet.html}.
+        \item KTR модель, \url{https://orbit-ml.readthedocs.io/en/latest/tutorials/ktrlite.html}.
+        \item Сергей Мастицкий, Анализ временных рядов с помощью R, глава про prophet, \url{https://ranalytics.github.io/tsa-with-r/ch-intro-to-prophet.html}.
         \item Тригонометрические предикторы, \url{https://robjhyndman.com/hyndsight/longseasonality/}.
     \end{itemize}
 
